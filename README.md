@@ -1,96 +1,110 @@
- <h1>📊 Backtesting Engine</h1> 
- A High-Performance C++ Engine with Python Strategy Interface
+<h1>📈 RustQuant</h1>
+<h3>A Cross-Platform Rust CLI for Options Pricing</h3>
 
-Shields / Badges:
-[C++ 17] - https://img.shields.io/badge/C++-17-blue
-[Python 3.10+] - https://img.shields.io/badge/Python-3.10+-green
-[License] - https://img.shields.io/github/license/johndcode/BacktestingEngine
+<p>
+  <img src="https://img.shields.io/badge/Rust-🦀-orange" alt="Rust">
+  <img src="https://img.shields.io/badge/version-0.4-blue" alt="Version">
+  <img src="https://img.shields.io/github/license/johndcode/RustQuant" alt="License">
+</p>
 
- ---
+---
 
- ### ✨ Overview
- The Backtesting Engine is a quantitative trading simulation framework written in C++ for performance
- with a Python interface for strategy scripting. It allows traders, researchers, and developers
- to rigorously test trading strategies before deploying to live markets.
+### ✨ Overview  
+RustQuant is a **command-line tool written in Rust** for pricing **financial options**.  
+It supports both **manual theoretical pricing** and **automatic pricing with live data**.  
 
- ### 🚀 Current features include:
- - Fast, event-driven C++ simulation core
- - Market data ingestion from CSV or API
- - Order management with queue priority & latency simulation
- - Portfolio & PnL tracking
- - Python bindings (via pybind11) for strategy scripting
- - High-level Python API (buy(), sell(), etc.) without exposing raw orders
+🚀 Latest version (`v0.4`) includes:  
+- ✅ Manual pricing for **European** & **American** options  
+- ✅ Calculation of the **Greeks**  
+- ✅ Default binomial steps set to `100`  
 
- ---
+For the full development story and detailed writeup, check out the blog post here:  
+👉 [RustQuant: My Cross-Platform CLI Options Pricer](https://www.johndcode.com/posts/Options-Pricer/)  
 
- ### ⚡ Installation
- Clone the repo and build with CMake:
+---
 
- git clone https://github.com/johndcode/BacktestingEngine.git
- cd BacktestingEngine
- mkdir build && cd build
- cmake ..
- make -j4
+### 📊 Models Implemented
+- **Black–Scholes Model** → European options  
+- **Cox-Ross-Rubinstein (Binomial) Model** → American & European options  
 
- The C++ binary will be located at:
- build/engine
+---
 
- Python bindings will be available after:
- pip install .
+### ⚡ Installation
+Clone the repo and build with Cargo:
 
- ---
+```bash
+git clone https://github.com/johndcode/RustQuant.git
+cd RustQuant
+cargo build --release
+```
 
- ### 🛠️ Usage
+The binary will be located at:
+`target/release/rustquant`
 
- 1. Define a Strategy in Python
- Strategies interact with the engine via a clean, high-level API:
+(Precompiled binaries for Windows and Linux [here](https://github.com/JohnDCode/RustQuant-Publish))
 
- from backtesting import StrategyContext
+---
 
- class MyStrategy:
-     def on_bar(self, ctx: StrategyContext, bar):
-         if bar.close > bar.open:
-             ctx.buy(quantity=10)
-         else:
-             ctx.sell(quantity=10)
+### 🛠️ Usage
 
- 2. Run Backtest
- Pass historical data into the engine:
+RustQuant has two main modes:
 
- python run_backtest.py --data ./data/AAPL.csv --strategy MyStrategy
+#### 1. Automatic Mode (Live Pricing)
 
- ➡️ Produces portfolio performance, order logs, and risk metrics.
+Fetches real options chain data and prices the closest matching option.
 
- (Insert screenshot of CLI output or equity curve here)
+```
+rustquant auto -s AAPL -k 200 --greeks
+```
 
- ---
+➡️ Select expiration date from dropdown → get fair price + Greeks
 
- ### ⚙️ Core Components
 
- - Engine → Core C++ simulation loop
- - MarketDataFeed → Feeds bars/ticks from CSV or API
- - Order & OrderManager → Limit, market, stop; queue priority handling
- - Portfolio → Tracks cash, positions, PnL, buying power
- - StrategyContext → Python-facing API for order submission
- - Latency Model → Simulates execution delay
- - Corporate Actions Handler → Adjusts for splits/dividends
+#### 2. Manual Mode (Theoretical Pricing)
 
- ---
+Supply all parameters (spot, strike, time, rate, volatility):
 
- ### 🔮 Roadmap
- Planned features for future versions:
- - Support for short-selling with margin constraints
- - Slippage & market impact simulation
- - Survivorship bias elimination (data cleaning tools)
- - Walk-forward testing & cross-validation modules
- - Expanded metrics: Sharpe, Sortino, drawdowns, exposure
+```
+rustquant manual -s 213.95 -k 200 -t 1 -r 0.0424 -v 0.2965 --european --greeks
 
- ---
+```
 
- ### 📬 Contact
- 👤 JohnDavid Abe
- 📧 johndavidabe101@gmail.com
- 💼 LinkedIn
- 🧑‍💻 GitHub
+### ⚙️ Arguments & Flags
 
- ⭐ If you like this project, consider giving it a star on GitHub!
+| Command | Flag | Description |
+|---------|------|-------------|
+| auto | -s, --symbol <SYMBOL> | Asset ticker symbol |
+|       | -k, --strike <STRIKE> | Target strike price |
+|       | -n, --steps <STEPS>   | Binomial steps (default: 100) |
+|       | -g, --greeks          | Display Greeks |
+|       | -c, --call            | Price a call option (default) |
+|       | -p, --put             | Price a put option |
+| manual | -s, --spot <SPOT>    | Asset spot price |
+|        | -k, --strike <STRIKE>| Option strike price |
+|        | -t, --time <TIME>    | Time to expiration (years) |
+|        | -r, --rate <RATE>    | Risk-free interest rate |
+|        | -v, --volatility <VOL>| Implied volatility |
+|        | -a, --american       | Price American option (default) |
+|        | -e, --european       | Price European option |
+|        | -g, --greeks         | Display Greeks |
+
+---
+
+### 🔮 Roadmap
+
+Planned features for future versions:
+- Automated pricing for European options with live data  
+- Support for dividend-adjusted pricing  
+- Expanded output formats (JSON/CSV for analysis)  
+
+---
+
+### 📬 Contact
+
+👤 JohnDavid Abe  
+📧 johndavidabe101@gmail.com  
+
+💼 LinkedIn  
+🧑‍💻 GitHub  
+
+⭐ If you like this project, consider giving it a star on GitHub!
