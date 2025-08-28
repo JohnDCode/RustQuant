@@ -14,12 +14,12 @@ RustQuant is a **command-line tool written in Rust** for pricing **financial opt
 It supports both **manual theoretical pricing** and **automatic pricing with live data**.  
 
 🚀 Latest version (`v0.4`) includes:  
-- ✅ Manual pricing for **European** & **American** options  
-- ✅ Calculation of the **Greeks**  
-- ✅ Default binomial steps set to `100`  
+- Manual pricing for **European** & **American** options  
+- Calculation of the **Greeks**  
+- Default binomial steps set to `100`  
 
 For the full development story and detailed writeup, check out the blog post here:  
-👉 [RustQuant: My Cross-Platform CLI Options Pricer](https://www.johndcode.com/posts/Options-Pricer/)  
+[RustQuant: My Cross-Platform CLI Options Pricer](https://www.johndcode.com/posts/Options-Pricer/)  
 
 ---
 
@@ -57,7 +57,7 @@ Fetches real options chain data and prices the closest matching option.
 rustquant auto -s AAPL -k 200 --greeks
 ```
 
-➡️ Select expiration date from dropdown → get fair price + Greeks
+Select expiration date from dropdown → get fair price + Greeks
 
 
 #### 2. Manual Mode (Theoretical Pricing)
