@@ -1,10 +1,10 @@
  <h1>📊 Backtesting Engine</h1> 
  A High-Performance C++ Engine with Python Strategy Interface
 
- Shields:
- [C++ 17](https://img.shields.io/badge/C++-17-blue)
- [Python 3.10+](https://img.shields.io/badge/Python-3.10+-green)
- [License](https://img.shields.io/github/license/johndcode/BacktestingEngine)
+Shields / Badges:
+[C++ 17] - https://img.shields.io/badge/C++-17-blue
+[Python 3.10+] - https://img.shields.io/badge/Python-3.10+-green
+[License] - https://img.shields.io/github/license/johndcode/BacktestingEngine
 
  ---
 
