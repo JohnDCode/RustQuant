@@ -19,7 +19,7 @@ It supports both **manual theoretical pricing** and **automatic pricing with liv
 - ✅ Default binomial steps set to `100`  
 
 For the full development story and detailed writeup, check out the blog post here:  
-👉 [RustQuant: My Cross-Platform CLI Options Pricer](#)  
+👉 [RustQuant: My Cross-Platform CLI Options Pricer](https://www.johndcode.com/posts/Options-Pricer/)  
 
 ---
 
