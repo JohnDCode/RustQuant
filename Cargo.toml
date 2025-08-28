@@ -1,0 +1,14 @@
+[package]
+name = "rustquant"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+reqwest = { version = "0.12", features = ["json", "blocking", "gzip", "cookies", "rustls-tls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1", features = ["full"] }
+dialoguer = "0.11.0"
+statrs = "0.18.0"
