@@ -1,4 +1,4 @@
-<h1>📈 RustQuant</h1>
+<h1>📈 RustQuant 0.4</h1>
 <h3>A Cross-Platform Rust CLI for Options Pricing</h3>
 
 <p>
